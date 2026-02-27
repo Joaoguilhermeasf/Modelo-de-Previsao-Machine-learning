@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <style>
+    @keyframes typing {
+      from {
+        width: 0;
+        white-space: nowrap;
+      }
+      to {
+        width: 100%;
+        white-space: normal;
+      }
+    }
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+  </style>
+
+  <body class="font-['Roboto'] bg-red-500">
+    <div
+      class="bg-white flex flex-col items-center p-5 gap-10 justify-center h-screen"
+    >
+      <h1 class="self-start text-5xl font-bold">
+        <span class="text-red-500">MODELO DE PRECIFICAÇÃO</span> DE IMÓVEIS
+        UTILIZANDO MACHINE LEARNING
+      </h1>
+      <h2 class="self-start">
+        Desenvolvido por
+        <span>João Guilherme Faria</span>
+      </h2>
+      <p class="animate-bounce">V</p>
+    </div>
+
+    <div
+      class="bg-red-500 font-bold flex flex-col rounded-t-2xl gap-5 items-center justify-center p-10"
+    >
+      <h2 class="text-white font-bold text-5xl self-start">
+        INFORMAÇÕES GERAIS
+      </h2>
+      <h2 class="text-white text-xl font-medium">
+        Essa página tem por objetivo apresentar o modelo desenvolvido com fins
+        educacionais e de pesquisa. A base de dados utilizada é de 2021 foi
+        criada por William Carlos e pode ser acessada por esse
+        <a
+          class="underline text-yellow-400"
+          href="https://www.kaggle.com/datasets/williamu32/imoveis-goiniago"
+          target="_blank"
+          >link</a
+        >
+        . O modelo prevê valores e metragens de apartamentos a partir de R$
+        50.000 ou 45m² na cidade de Goiânia. Foi obtido um Coeficiente de
+        Determinação de 0.91 (Explica 91% da variação dos dados), um resultado
+        considerado excelente, e um erro de aproximadamente 15% em relação à
+        média, valor considerado razoável.
+      </h2>
+    </div>
+
+    <div
+      class="bg-red-500 flex flex-col justify-center items-center gap-20 p-10"
+    >
+      <div
+        class="flex flex-row justify-center items-center gap-10 w-full mt-6 self-start hover:scale-110"
+      >
+        <div
+          class="bg-white p-5 rounded-xl border-r-4 border-b-4 w-fit border-blue-400"
+        >
+          <img
+            class="w-full h-64 object-cover"
+            src="../static/img/reglin.png"
+            alt=""
+          />
+        </div>
+        <h3 class="text-white text-2xl font-bold w-1/3">
+          O modelo ajusta uma reta de regressão linear que descreve a relação
+          entre o preço e a área dos apartamentos, permitindo realizar
+          previsões.
+        </h3>
+      </div>
+      <div
+        class="flex flex-row justify-center items-center gap-10 w-full mt-6 self-start hover:scale-110"
+      >
+        <h3 class="text-white text-2xl font-bold w-1/3">
+          O gráfico em pares exibe a distribuição individual de cada variável na
+          diagonal e a relação entre elas fora da diagonal, permitindo
+          identificar visualmente que existe uma correlação positiva entre o
+          preço e a área dos apartamentos.
+        </h3>
+        <div
+          class="bg-white p-5 rounded-xl border-r-4 border-b-4 w-fit border-yellow-400"
+        >
+          <img class="w-96" src="../static/img/pairpl.png" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="bg-stone-300 rounded-t-2xl flex flex-col gap-5 items-center justify-center h-screen"
+    >
+      <h2 class="font-bold text-xl">
+        MODELO DE PREVISÃO DE PREÇO
+        <span class="font-light text-sm">( Mínimo 50.000R$ )</span>
+      </h2>
+      <div
+        class="flex flex-col bg-gray-200 gap-5 pl-5 pr-5 items-center justify-center h-1/2 w-2/5 border-r-4 border-b-4 border-blue-400 rounded-xl"
+      >
+        <div
+          class="overflow-hidden bg-neutral-100 text-lg w-full h-2/3 p-2 rounded"
+        >
+          <div class="min-w-0">
+            <p
+              id="resultadoRS"
+              class="overflow-hidden whitespace-nowrap border-r-2 w-max"
+            ></p>
+          </div>
+        </div>
+
+        <div class="flex flex-row items-center justify-center w-full text-xl">
+          <input
+            id="inputRS"
+            class="outline-none bg-neutral-100 text-lg w-full border p-2 rounded-xl"
+            type="text"
+            placeholder="R$:"
+          />
+          <button
+            onclick="buscarRS()"
+            class="bg-neutral-100 flex items-center justify-center border rounded-xl m-2 pb-1 pl-2 pr-2"
+          >
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="bg-stone-300 flex flex-col gap-5 items-center justify-center h-screen"
+    >
+      <h2 class="font-bold text-xl">
+        MODELO DE PREVISÃO DE M²
+        <span class="font-light text-sm">( Mínimo 45m² )</span>
+      </h2>
+      <div
+        class="flex flex-col bg-gray-200 gap-5 pl-5 pr-5 items-center justify-center h-1/2 w-2/5 border-r-4 border-b-4 border-yellow-400 rounded-xl"
+      >
+        <div
+          class="overflow-hidden bg-neutral-100 text-lg w-full h-2/3 p-2 rounded"
+        >
+          <div class="min-w-0">
+            <p
+              id="resultadoM2"
+              class="overflow-hidden whitespace-nowrap border-r-2 w-max"
+            ></p>
+          </div>
+        </div>
+
+        <div class="flex flex-row items-center justify-center w-full text-xl">
+          <input
+            id="inputM2"
+            class="outline-none bg-neutral-100 text-lg w-full border p-2 rounded-xl"
+            type="text"
+            placeholder="m²:"
+          />
+          <button
+            onclick="buscarM2()"
+            class="bg-neutral-100 flex items-center justify-center border rounded-xl m-2 pb-1 pl-2 pr-2"
+          >
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("inputRS").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") buscarRS();
+      });
+
+      document.getElementById("inputM2").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") buscarM2();
+      });
+
+      function reiniciarAnimacao(el, texto) {
+        el.innerText = "";
+        el.style.animation = "none";
+        el.offsetHeight; // força o reflow
+        el.innerText = texto;
+        el.style.animation = "typing 3s steps(30, end) forwards";
+      }
+
+      function buscarRS() {
+        const valor = document.getElementById("inputRS").value;
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: `valor=${valor}`,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.resultadoRS) {
+              const el = document.getElementById("resultadoRS");
+              reiniciarAnimacao(el, data.resultadoRS);
+            }
+          });
+      }
+
+      function buscarM2() {
+        const metros = document.getElementById("inputM2").value;
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: `metros=${metros}`,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.resultadoM2) {
+              const el = document.getElementById("resultadoM2");
+              reiniciarAnimacao(el, data.resultadoM2);
+            }
+          });
+      }
+    </script>
+  </body>
+</html>
